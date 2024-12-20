@@ -38,7 +38,6 @@ loginForm.addEventListener('submit', (e) => {
         .then((userCredential) => {
             const userId = userCredential.user.uid;
 
-            // Check if the profile exists in Firestore
             firestore.collection('users').doc(userId).get()
                 .then((doc) => {
                     if (doc.exists) {
@@ -46,7 +45,7 @@ loginForm.addEventListener('submit', (e) => {
                         window.location.href = 'home.html';
                     } else {
                         // Redirect to profile creation if no profile exists
-                        window.location.href = 'home.html';
+                        window.location.href = 'profile.html';
                     }
                 })
                 .catch((error) => {
@@ -88,7 +87,7 @@ auth.onAuthStateChanged((user) => {
                 if (doc.exists) {
                     window.location.href = 'home.html';
                 } else {
-                    window.location.href = 'profile.html';
+                    window.location.href = 'home.html';
                 }
             });
     }

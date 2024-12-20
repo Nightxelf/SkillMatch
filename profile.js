@@ -27,7 +27,7 @@ const firebaseConfig = {
   const phoneInput = document.getElementById("phone");
   
  
-  let profileImageURL = "images/default-profile.png"; // Default profile image
+  let profileImageURL = "images/default-profile.png"; 
   let skills = [];
   
   
@@ -40,6 +40,7 @@ const firebaseConfig = {
           if (doc.exists) {
             const profile = doc.data();
   
+            
             fullNameInput.value = profile.fullName || '';
             ExperienceInput.value = profile.Experience || '';
             emailInput.value = profile.email || '';
