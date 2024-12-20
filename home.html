@@ -3,21 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>SkillMatch - Home</title>
   <link rel="stylesheet" href="home.css">
 </head>
 <body>
+  <!-- Navbar -->
   <header>
     <nav class="navbar">
       <div class="navbar-brand">
         <a href="home.html">SkillMatch</a>
       </div>
       <ul class="navbar-menu">
-        <li><a href="profile.html" class="profile-btn">Profile</a></li>
-        <li><a href="index.html" class="logout-btn">Logout</a></li>
         <li><a href="home.html" class="home-btn">Home</a></li>
+        <li><a href="profile.html" class="profile-btn">Profile</a></li>
+        <li><a href="index.html" class="logout-btn">Logout</a></li> 
       </ul>
     </nav>
   </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <h1>Browse Skills</h1>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search by skill..." />
+      <button id="search-btn">Search</button>
+    </div>
+    <ul id="skills-list" class="skills-list">
+      <!-- Profiles will be dynamically populated here -->
+    </ul>
+  </main>
+
+  <!-- Firebase and JavaScript -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>

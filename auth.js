@@ -16,7 +16,6 @@ const signupForm = document.getElementById('signup-form');
 const signupLink = document.getElementById('signup-link');
 const loginLink = document.getElementById('login-link');
 
-// Login and Signup Forms 
 signupLink.addEventListener('click', (e) => {
     e.preventDefault();
     loginForm.style.display = 'none';
@@ -29,7 +28,7 @@ loginLink.addEventListener('click', (e) => {
     loginForm.style.display = 'block';
 });
 
-// Login 
+// Login
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
@@ -37,15 +36,29 @@ loginForm.addEventListener('submit', (e) => {
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            
-            window.location.href = 'home.html';
+            const userId = userCredential.user.uid;
+
+            // Check if the profile exists in Firestore
+            firestore.collection('users').doc(userId).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        // Redirect to home if the profile exists
+                        window.location.href = 'home.html';
+                    } else {
+                        // Redirect to profile creation if no profile exists
+                        window.location.href = 'home.html';
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching profile:", error);
+                });
         })
         .catch((error) => {
             alert(error.message);
         });
 });
 
-// Signup 
+// Signup
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('signup-name').value;
@@ -60,28 +73,23 @@ signupForm.addEventListener('submit', (e) => {
 
     auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            return firestore.collection('users').doc(userCredential.user.uid).set({
-                name: name,
-                email: email,
-                skills: [],
-                availability: false
-            });
-        })
-        .then(() => {
-            alert("Signup successful! Please log in.");
-            signupForm.reset(); 
-            signupForm.style.display = 'none';
-            loginForm.style.display = 'block'; 
+            const userId = userCredential.user.uid;
+            window.location.href = 'profile.html';
         })
         .catch((error) => {
             alert(error.message);
         });
 });
 
-// Authentication State Observer
 auth.onAuthStateChanged((user) => {
     if (user && window.location.pathname.includes('index.html')) {
-       
+        firestore.collection('users').doc(user.uid).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    window.location.href = 'home.html';
+                } else {
+                    window.location.href = 'profile.html';
+                }
+            });
     }
 });
-
