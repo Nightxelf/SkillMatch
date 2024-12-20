@@ -1,4 +1,3 @@
-// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyC696N7bKlgK71fvFT1wWEspqQ6qwVbggM",
     authDomain: "skillmatch-bc4d8.firebaseapp.com",
@@ -8,18 +7,15 @@ const firebaseConfig = {
     appId: "1:449976959952:web:c8b6c59a2a1343073aefd5"
   };
   
-  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
   
-  // Elements
   const searchInput = document.getElementById("search-input");
   const searchBtn = document.getElementById("search-btn");
   const skillsList = document.getElementById("skills-list");
   
-  // Fetch and Display Profiles
   function displayProfiles(profiles) {
-    skillsList.innerHTML = ""; // Clear existing list
+    skillsList.innerHTML = ""; 
     if (profiles.length === 0) {
       const li = document.createElement("li");
       li.textContent = "No profiles found for this skill.";
@@ -58,6 +54,5 @@ const firebaseConfig = {
       });
   }
   
-  // Event Listeners
   searchBtn.addEventListener("click", searchProfiles);
   
