@@ -27,7 +27,7 @@ const firebaseConfig = {
   const phoneInput = document.getElementById("phone");
   
  
-  let profileImageURL = "images/default-profile.png"; 
+  let profileImageURL = "images/profile.png"; 
   let skills = [];
   
   
@@ -47,7 +47,7 @@ const firebaseConfig = {
             phoneInput.value = profile.phone || '';
             availabilityInput.checked = profile.availability || false;
             skills = profile.skills || [];
-            profileImageURL = profile.profileImageURL || "images/default-profile.png";
+            profileImageURL = profile.profileImageURL || "images/profile.png";
             profilePreview.src = profileImageURL;
             updateSkillsList();
           }
@@ -60,7 +60,7 @@ const firebaseConfig = {
     }
   });
   
-   /*profileImageInput.addEventListener("change", (event) => {
+    profileImageInput.addEventListener("change", (event) => {
     const file = profileImageInput.files[0];
   
     if (file) {
@@ -74,11 +74,11 @@ const firebaseConfig = {
           console.error("Image upload failed:", error);
         },
         () => {
-          // Get the uploaded image URL
+          
           uploadTask.snapshot.ref.getDownloadURL()
             .then((url) => {
               profileImageURL = url;
-              profilePreview.src = profileImageURL; // Update preview
+              profilePreview.src = profileImageURL;
             })
             .catch((error) => {
               console.error("Error getting image URL:", error);
@@ -86,7 +86,7 @@ const firebaseConfig = {
         }
       );
     }
-  });*/
+  });
   
   
   addSkillBtn.addEventListener("click", () => {
